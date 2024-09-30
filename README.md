@@ -52,15 +52,9 @@ A Python tool for analyzing Ethereum smart contracts, retrieving contract creato
     - List other contracts deployed by the same creator.
     - Display the top interactors with the contract.
 
-## Example Usage
+## Running Tests
+
+To ensure the repository is cloned correctly and everything is set up, run the unit tests using the following command:
 
 ```bash
-Enter the Ethereum contract address: 0xContractAddressHere
-Analyzing contract: 0xContractAddressHere
-Contract Creator: 0xCreatorAddress
-Other contracts deployed by the creator:
-- 0xAnotherContractAddress1
-- 0xAnotherContractAddress2
-Top interactors:
-- 0xUser1: 5 interactions
-- 0xUser2: 3 interactions
+python3 -m unittest discover -s tests

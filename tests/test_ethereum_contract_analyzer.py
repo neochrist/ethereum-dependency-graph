@@ -1,15 +1,16 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from ethereum_contract_analyzer import ( # type: ignore
+from main.ethereum_contract_analyzer import ( 
     get_contract_creator,
     get_contracts_by_creator,
     get_top_interactors,
     analyze_contract
 )
 
+
 class TestEthereumContractAnalyzer(unittest.TestCase):
 
-    @patch('ethereum_contract_analyzer.requests.get')
+    @patch('main.ethereum_contract_analyzer.requests.get')
     def test_get_contract_creator(self, mock_get):
         mock_response = MagicMock()
         mock_response.json.return_value = {
@@ -21,7 +22,7 @@ class TestEthereumContractAnalyzer(unittest.TestCase):
         creator = get_contract_creator('0xcontractaddress')
         self.assertEqual(creator, '0x123456789abcdef')
 
-    @patch('ethereum_contract_analyzer.requests.get')
+    @patch('main.ethereum_contract_analyzer.requests.get')
     def test_get_contracts_by_creator(self, mock_get):
         mock_response = MagicMock()
         mock_response.json.return_value = {
@@ -37,7 +38,7 @@ class TestEthereumContractAnalyzer(unittest.TestCase):
         contracts = get_contracts_by_creator('0xcreatoraddress')
         self.assertEqual(contracts, ['0xcontract1', '0xcontract2'])
 
-    @patch('ethereum_contract_analyzer.requests.get')
+    @patch('main.ethereum_contract_analyzer.requests.get')
     def test_get_top_interactors(self, mock_get):
         mock_response = MagicMock()
         mock_response.json.return_value = {
@@ -57,9 +58,9 @@ class TestEthereumContractAnalyzer(unittest.TestCase):
         expected = [('0xuser1', 2), ('0xuser2', 2)]
         self.assertEqual(top_interactors, expected)
 
-    @patch('ethereum_contract_analyzer.get_contract_creator')
-    @patch('ethereum_contract_analyzer.get_contracts_by_creator')
-    @patch('ethereum_contract_analyzer.get_top_interactors')
+    @patch('main.ethereum_contract_analyzer.get_contract_creator')
+    @patch('main.ethereum_contract_analyzer.get_contracts_by_creator')
+    @patch('main.ethereum_contract_analyzer.get_top_interactors')
     def test_analyze_contract(self, mock_top_interactors, mock_contracts_by_creator, mock_contract_creator):
         mock_contract_creator.return_value = '0xcreator'
         mock_contracts_by_creator.return_value = ['0xcontract1', '0xcontract2']
@@ -76,6 +77,3 @@ class TestEthereumContractAnalyzer(unittest.TestCase):
             mock_print.assert_any_call("Top interactors:")
             mock_print.assert_any_call("- 0xuser1: 5 interactions")
             mock_print.assert_any_call("- 0xuser2: 3 interactions")
-
-if __name__ == '__main__':
-    unittest.main()
