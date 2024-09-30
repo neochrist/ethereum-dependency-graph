@@ -18,8 +18,8 @@ A Python tool for analyzing Ethereum smart contracts, retrieving contract creato
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/username/repo.git
-    cd repo
+    git clone https://github.com/username/repo.git](https://github.com/neochrist/ethereum-dependency-graph/)
+    cd ethereum-dependency-graph
     ```
 
 2. Install Dependencies:
